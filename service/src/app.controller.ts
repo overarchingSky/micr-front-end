@@ -22,4 +22,10 @@ export class AppController {
       response.status(200).send(res)
     })
   }
+  @Get('my')
+  my(@Res() response){
+    this.appService.doc().then(res => {
+      response.status(200).send(res)
+    })
+  }
 }

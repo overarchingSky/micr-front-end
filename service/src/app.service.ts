@@ -12,6 +12,7 @@ export class AppService {
     return { message:'my name is TL' }
   }
   doc() {
-    return this.httpService.get('http://clw.5ihw.local:8080/js/1.js').toPromise().then(res => res.data)
+    //http://clw.5ihw.cn/js/chunk-87d091b4.b7e89707.js
+    return this.httpService.get('http://clw.5ihw.cn/js/my.8f0108aa.js').toPromise().then(res => res.data)
   }
 }
