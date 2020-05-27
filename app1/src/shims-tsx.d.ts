@@ -10,4 +10,5 @@ declare global {
       [elem: string]: any;
     }
   }
+  interface Window { vm: any; bfhlMircApp: Record<string, any>}
 }
