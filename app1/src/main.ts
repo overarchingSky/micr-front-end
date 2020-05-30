@@ -1,20 +1,43 @@
 import Vue from 'vue'
+//import { registerMicroApps, start, setDefaultMountApp } from 'qiankun'
 import App from './App.vue'
 import router from './router'
-import MircApp from './mirc-app'
 
-import axios from 'axios'
-console.log('加载远程路由')
-axios.get('/doc').then(res => {
-  console.log(res.data)
-  console.log(eval('(function (e) { function t(t) { for (var n, a, i = t[0], c = t[1], s = t[2], l = 0, p = []; l < i.length; l++)a = i[l], Object.prototype.hasOwnProperty.call(o, a) && o[a] && p.push(o[a][0]), o[a] = 0; for (n in c) Object.prototype.hasOwnProperty.call(c, n) && (e[n] = c[n]); f && f(t); while (p.length) p.shift()(); return u.push.apply(u, s || []), r() } function r() { for (var e, t = 0; t < u.length; t++) { for (var r = u[t], n = !0, a = 1; a < r.length; a++) { var c = r[a]; 0 !== o[c] && (n = !1) } n && (u.splice(t--, 1), e = i(i.s = r[0])) } return e } var n = {}, o = { "mirc-app": 0 }, u = []; function a(e) { return i.p + "js/" + ({ about: "about", user: "user" }[e] || e) + "." + { about: "9b1f4b08", user: "ae057ac3" }[e] + ".js" } function i(t) { if (n[t]) return n[t].exports; var r = n[t] = { i: t, l: !1, exports: {} }; return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports } i.e = function (e) { var t = [], r = o[e]; if (0 !== r) if (r) t.push(r[2]); else { var n = new Promise((function (t, n) { r = o[e] = [t, n] })); t.push(r[2] = n); var u, c = document.createElement("script"); c.charset = "utf-8", c.timeout = 120, i.nc && c.setAttribute("nonce", i.nc), c.src = a(e); var s = new Error; u = function (t) { c.onerror = c.onload = null, clearTimeout(l); var r = o[e]; if (0 !== r) { if (r) { var n = t && ("load" === t.type ? "missing" : t.type), u = t && t.target && t.target.src; s.message = "Loading chunk " + e + " failed.\n(" + n + ": " + u + ")", s.name = "ChunkLoadError", s.type = n, s.request = u, r[1](s) } o[e] = void 0 } }; var l = setTimeout((function () { u({ type: "timeout", target: c }) }), 12e4); c.onerror = c.onload = u, document.head.appendChild(c) } return Promise.all(t) }, i.m = e, i.c = n, i.d = function (e, t, r) { i.o(e, t) || Object.defineProperty(e, t, { enumerable: !0, get: r }) }, i.r = function (e) { "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, i.t = function (e, t) { if (1 & t && (e = i(e)), 8 & t) return e; if (4 & t && "object" === typeof e && e && e.__esModule) return e; var r = Object.create(null); if (i.r(r), Object.defineProperty(r, "default", { enumerable: !0, value: e }), 2 & t && "string" != typeof e) for (var n in e) i.d(r, n, function (t) { return e[t] }.bind(null, n)); return r }, i.n = function (e) { var t = e && e.__esModule ? function () { return e["default"] } : function () { return e }; return i.d(t, "a", t), t }, i.o = function (e, t) { return Object.prototype.hasOwnProperty.call(e, t) }, i.p = "/", i.oe = function (e) { throw console.error(e), e }; var c = window["webpackJsonp"] = window["webpackJsonp"] || [], s = c.push.bind(c); c.push = t, c = c.slice(); for (var l = 0; l < c.length; l++)t(c[l]); var f = s; u.push([1, "chunk-vendors"]), r() })({ 1: function (e, t, r) { e.exports = r("acc2") }, acc2: function (e, t, r) { "use strict"; r.r(t); var n, o = r("2909"), u = (r("e260"), r("e6cf"), r("cca6"), r("a79d"), r("afbc")), a = r("c5e2"), i = Object(a["b"])(); (n = i.remoteRoutes).push.apply(n, Object(o["a"])(u["b"])), window.$BfhlMircApp = i }, afbc: function (e, t, r) { "use strict"; r.d(t, "b", (function () { return u })); r("d3b7"); var n = r("2b0e"), o = r("8c4f"); n["a"].use(o["a"]); var u = [{ path: "/a", name: "a", component: function (e) { return r.e("about").then(r.bind(null, "ae69")) } }, { path: "/b", name: "b", component: function (e) { return r.e("user").then(r.bind(null, "fc17")) } }], a = new o["a"]({ mode: "history", base: "/", routes: u }); console.log("install remote router", u), t["a"] = a }, c5e2: function (e, t, r) { "use strict"; r.d(t, "b", (function () { return a })), r.d(t, "a", (function () { return i })); r("99af"), r("4de4"), r("4160"), r("159b"); var n, o = r("d4ec"), u = r("bee2"); function a() { return window.$BfhlMircApp || { remoteRoutes: [] } } var i = function () { function e(t) { Object(o["a"])(this, e), this.remoteRoutes = [], this.router = t, this.remoteRoutes = a().remoteRoutes; var r = this.remoteRoutes.push, u = this; this.remoteRoutes.push = function () { n && clearInterval(n), n = setTimeout((function () { u.install() }), 0); for (var e = arguments.length, t = new Array(e), o = 0; o < e; o++)t[o] = arguments[o]; return  this.install() } return Object(u["a"])(e, [{ key: "install", value: function (e) { var t = this, r = (e || t.remoteRoutes).filter((function (e) { return e.isRemoteRoute && !e.installed })); this.router.addRoutes(r), r.forEach((function (e) { return e.installed = !0 })) } }]), e }() } });'))
-})
 
-new MircApp(router)
 
 Vue.config.productionTip = false
 
-window.vm = new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+// const render = new Vue({
+//   router,
+//   render: h => h(App)
+// })
+
+const loader = () => {
+  new Vue({
+    router,
+    render: h => h(App)
+  })
+}
+
+loader()
+
+// registerMicroApps([
+//   {
+//     name: 'web', // app name registered
+//     entry: 'http://web4.5ihw.local:8082/',
+//     container: '#app',
+//     loader,
+//     activeRule: '/web',
+//   },
+//   {
+//     name: 'app1',
+//     entry: 'http://localhost:8081',
+//     container: '#app',
+//     loader,
+//     activeRule: '/app1',
+//   },
+// ]);
+
+// setDefaultMountApp('/web');
+
+// start();

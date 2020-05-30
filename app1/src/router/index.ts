@@ -1,53 +1,30 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
-import axios from 'axios'
-
-// axios.get('/doc').then(res => {
-//   //eval(res.data)
-//   console.log('doc',res.data)
-// })
-
-//__webpack_require__.e('')
 
 Vue.use(VueRouter)
 
-export const routes: Array<RouteConfig> = [
+  const routes: Array<RouteConfig> = [
   {
-    path: '/app1/home',
+    path: '/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/app1/c',
-    name: 'c',
+    path: '/about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: (resolve) => {
-      //window.ssss = __webpack_require__
-      return import(/* webpackChunkName: "c" */ '../views/c.vue')
-    }
-  },
-  {
-    path: '/app1/d',
-    name: 'd',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: (resolve) => {
-      return import(/* webpackChunkName: "d" */ '../views/d.vue')
-    }
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   }
- ]
+]
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  //@ts-ignore
+  base: window.__POWERED_BY_QIANKUN__ ? '/app1' : process.env.BASE_URL,
   routes
 })
-
-
-console.log('install remote router',routes)
 
 export default router
