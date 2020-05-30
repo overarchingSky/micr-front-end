@@ -1,12 +1,15 @@
 import { registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, initGlobalState } from 'qiankun';
 import './index.less';
 
+// for angular subapp
+import 'zone.js';
+
 /**
  * 主应用 **可以使用任意技术栈**
  * 以下分别是 React 和 Vue 的示例，可切换尝试
  */
-//import render from './render/ReactRender';
-import render from './render/VueRender'
+import render from './render/ReactRender';
+// import render from './render/VueRender'
 
 /**
  * Step1 初始化应用（可选）
@@ -25,20 +28,37 @@ const loader = loading => render({ loading });
 registerMicroApps(
   [
     {
-      name: 'web', // app name registered
-      entry: 'http://web4.5ihw.local:8082/',
-      container: '#subapp-container',
+      name: 'web',
+      entry: 'http://web4.5ihw.local:8082',
+      container: '#subapp-viewport',
       loader,
       activeRule: '/web',
     },
     {
       name: 'app1',
-      entry: 'http://localhost:8081',
-      container: '#subapp-container',
+      entry: '//localhost:8081',
+      container: '#subapp-viewport',
       loader,
       activeRule: '/app1',
     }
-  ]
+  ],
+  {
+    beforeLoad: [
+      app => {
+        console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
+      },
+    ],
+    beforeMount: [
+      app => {
+        console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
+      },
+    ],
+    afterUnmount: [
+      app => {
+        console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name);
+      },
+    ],
+  },
 );
 
 const { onGlobalStateChange, setGlobalState } = initGlobalState({
@@ -50,11 +70,15 @@ let  menus = []
 
 onGlobalStateChange((value, prev) => {
   console.log('[onGlobalStateChange - master]:', value)
+  menus = value.menus
 });
 
-// setGlobalState({
-  
-// });
+setGlobalState({
+  ignore: 'master',
+  user: {
+    name: 'master',
+  },
+});
 
 /**
  * Step3 设置默认进入的子应用
@@ -64,19 +88,7 @@ setDefaultMountApp('/vue');
 /**
  * Step4 启动应用
  */
-start({
-  fetch(url, ...args) {
-    console.log('+++url',url)
-    console.log('+++args',args)
-    if (url === '/images/logon/theme01/bg.jpg') {
-      return {
-        async text() { return '' }
-      };
-    }
-
-    return window.fetch(url, ...args);
-  }
-});
+start();
 
 runAfterFirstMounted(() => {
   console.log('[MainApp] first app mounted');
